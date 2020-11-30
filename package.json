@@ -1,0 +1,50 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio?",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot --open",
+    "build": "webpack --config webpack.config.js --mode production",
+    "dev-build": "webpack --progress -d --config webpack.config.js",
+    "watch": "webpack --progress -d --config webpack.config.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matthew-Simanonis/portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matthew-Simanonis/portfolio/issues"
+  },
+  "homepage": "https://github.com/Matthew-Simanonis/portfolio#readme",
+  "dependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "apexcharts": "^3.22.2",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.2.2",
+    "file-loader": "^6.0.0",
+    "history": "^5.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-apexcharts": "^1.3.7",
+    "react-elastic-carousel": "^0.7.4",
+    "react-fade-in": "^1.1.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "save-dev": "0.0.1-security",
+    "style-loader": "^1.2.1",
+    "styled-components": "^5.1.1",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
