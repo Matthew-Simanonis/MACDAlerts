@@ -21,16 +21,6 @@ const GraphPrice = React.memo(({ stock, dataframe }) => {
             data: dataframe.twohundredma,
             type: 'line'
         },      
-        {
-            name: 'Buys',
-            data: dataframe.buys,
-            type: 'line'
-        },
-        {
-            name: 'Sells',
-            data: dataframe.sells,
-            type: 'line'
-        }
     ];
     var options = {
         title: {
@@ -47,15 +37,15 @@ const GraphPrice = React.memo(({ stock, dataframe }) => {
                 datetimeFormatter: {
                   month: 'MMM \'yy',
                   day: 'dd MMM yy',
-                  
-
-                  
                 }
               }
         },
+        animations : {
+            enabled: false
+        },
         markers: {
-            size: [0,0,0,3,3],
-            strokeColors: [undefined, undefined, undefined, '#00f014', '#f01400'],
+            size: [0,0,0],
+            strokeColors: [undefined, undefined, undefined],///, '#00f014', '#f01400']
             fillOpacity: 0
         },
         tooltip: {
@@ -80,7 +70,7 @@ const GraphPrice = React.memo(({ stock, dataframe }) => {
         legend: {
             position: 'top'
         },
-        colors: ['#2CB700', '#3145ad', '#d62811', '#00f014', '#f01400'],
+        colors: ['#2CB700', '#3145ad', '#d62811'],///, '#00f014', '#f01400'],
         fill: {
             type: ['gradient', 'solid', 'solid'], 
             colors: ['#1ed61e'],

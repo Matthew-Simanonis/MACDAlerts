@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy } from 'react';
 
 //Import Components
-import GraphPrice from './graphprice'
-import GraphMacd from './graphmacd';
-import GraphStoch from './graphstoch';
-import SearchBar from './searchbar'
+import Graphs from './graphs'
+import SearchBar from './searchbar';
+import LoadingSpinner from './loadingspinner'
+import FavoritesList from './favorites';
 
 function App() {
     // States
@@ -12,15 +12,15 @@ function App() {
     const [dataframe, setDataframe] = useState({close: [0]})
     const [stock, setStock] = useState('ETH-USD')
     const [timeframe, setTimeframe] = useState(['1y'])
+    const [loading, setLoading] = useState(true)
 
     const fetchGraph = () => {
-        console.log('sent')
         fetch(`/getgraph?stock=${stock}&timeframe=${timeframe}`)
         .then(response => response.json())
             .then(json => {
                 if (json.status === 200) {
-                    console.log('Recieved')
                     setDataframe(json)
+                    setLoading(false)
                 }
                 else{
                     console.log('Error')
@@ -29,6 +29,7 @@ function App() {
         };
 
     useEffect(() => {
+            setLoading(true)
             fetchGraph();
             }, [timeframe, stock] )
 
@@ -40,6 +41,9 @@ function App() {
                 <div className='stock-info'>
                     <h1>${stock}</h1>
                     <h1>Current Price: ${dataframe.current}</h1>
+                    <button className='add-favorite'>
+                        <i className='fa fa-plus'></i>
+                    </button>
                 </div>
                 <SearchBar
                     input = {input}
@@ -48,15 +52,11 @@ function App() {
                     setTimeframe = {setTimeframe}
                 />
             </div>
-            <GraphPrice
+            {loading ? <LoadingSpinner/>: <div></div>}
+            <Graphs 
                 stock={stock}
                 dataframe={dataframe}
-            />
-            <GraphMacd
-                dataframe={dataframe}
-            />
-            <GraphStoch
-                dataframe={dataframe}
+                loading={loading}
             />
         </div>
     );

@@ -1,27 +1,26 @@
 import { useEffect } from 'react';
-import React from 'react';
 import ReactApexChart from 'react-apexcharts';
+import React from 'react';
 
-const GraphMacd = React.memo(({ dataframe }) => {
-    const seriesMACD = [
+const GraphStoch = React.memo(({ dataframe }) => {
+    const seriesStoch = [
         {
-            name: `MACD`,
-            data: dataframe.macd,
+            name: `K line`,
+            data: dataframe.stochk,
             type: 'line'
         },
         {
-            name: 'Signal Line',
-            data: dataframe.signal,
+            name: 'D line',
+            data: dataframe.stochd,
             type: 'line'
         }
     ];
-    const optionsMACD = {
+    const optionsStoch = {
         title: {
-            text: 'MACD/Signal line'
+            text: 'Stochastic Indicator'
         },
         chart: {
-            id: 'macd',
-            group: 'main'
+            id: 'stoch',
         },
         xaxis: {
             categories: dataframe.dates,
@@ -37,13 +36,22 @@ const GraphMacd = React.memo(({ dataframe }) => {
         legend: {
             position: 'top'
         },
-        colors: ['#108fe3', '#fcc203'],
+        colors: ['#fcc203', '#108fe3'],
         yaxis: {
             opposite: true,
             decimalsInFloat: 1,
             labels: {
                 minWidth: 40
-            }
+            },
+            min: 0,
+            max: 100
+        },
+        annotations : {
+            yaxis: [{
+                y: 80,
+                y2: 20,
+                opacity: .2 
+            }]
         },
         theme: {
             mode: 'dark'
@@ -54,9 +62,9 @@ const GraphMacd = React.memo(({ dataframe }) => {
     };
 
     return (
-        <div id='macd-graph'>
-            <ReactApexChart series={seriesMACD} options={optionsMACD} height='350px'/>
+        <div id='stoch-graph'>
+            <ReactApexChart series={seriesStoch} options={optionsStoch} height='250px'/>
         </div>
     );
 })
-export default GraphMacd;
+export default GraphStoch;

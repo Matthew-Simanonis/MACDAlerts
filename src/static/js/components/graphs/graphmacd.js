@@ -1,26 +1,27 @@
 import { useEffect } from 'react';
-import ReactApexChart from 'react-apexcharts';
 import React from 'react';
+import ReactApexChart from 'react-apexcharts';
 
-const GraphStoch = React.memo(({ dataframe }) => {
-    const seriesStoch = [
+const GraphMacd = React.memo(({ dataframe }) => {
+    const seriesMACD = [
         {
-            name: `K line`,
-            data: dataframe.stochk,
+            name: `MACD`,
+            data: dataframe.macd,
             type: 'line'
         },
         {
-            name: 'D line',
-            data: dataframe.stochd,
+            name: 'Signal Line',
+            data: dataframe.signal,
             type: 'line'
         }
     ];
-    const optionsStoch = {
+    const optionsMACD = {
         title: {
-            text: 'Stochastic Indicator'
+            text: 'MACD/Signal line'
         },
         chart: {
-            id: 'stoch',
+            id: 'macd',
+            group: 'main'
         },
         xaxis: {
             categories: dataframe.dates,
@@ -36,22 +37,13 @@ const GraphStoch = React.memo(({ dataframe }) => {
         legend: {
             position: 'top'
         },
-        colors: ['#fcc203', '#108fe3'],
+        colors: ['#108fe3', '#fcc203'],
         yaxis: {
             opposite: true,
             decimalsInFloat: 1,
             labels: {
                 minWidth: 40
-            },
-            min: 0,
-            max: 100
-        },
-        annotations : {
-            yaxis: [{
-                y: 80,
-                y2: 20,
-                opacity: .2 
-            }]
+            }
         },
         theme: {
             mode: 'dark'
@@ -62,9 +54,9 @@ const GraphStoch = React.memo(({ dataframe }) => {
     };
 
     return (
-        <div id='stoch-graph'>
-            <ReactApexChart series={seriesStoch} options={optionsStoch} height='350px'/>
+        <div id='macd-graph'>
+            <ReactApexChart series={seriesMACD} options={optionsMACD} height='250px'/>
         </div>
     );
 })
-export default GraphStoch;
+export default GraphMacd;

@@ -10,9 +10,7 @@ DIFFERENCE = 4
 def get_graph(ticker, tf):
     ticker = ticker.replace('"','')
     stock = yf.Ticker(ticker)
-    print('getting hist')
     hist = stock.history(period='max')
-    print('step 2')
     if len(hist) < 1:
         return {
             'status' : 400,
@@ -22,7 +20,13 @@ def get_graph(ticker, tf):
     fulldf = fulldf[-TIMEFRAME[tf]:]
     findcrossmacd(fulldf)
     findcrossstocastic(fulldf)
-    isbuy(fulldf)
+    try: 
+        isbuy(fulldf)
+    except:
+        return {
+            'status' : 400,
+            'hasError' : True
+        }
     fulldf = fulldf.fillna('null')
 
     prices = fulldf['Close'].to_list()
@@ -123,6 +127,7 @@ def isbuy(df):
         elif stoch == True:
             counter += 1
     return df, buys, sells
+
 
 def myconverter(o):
     if isinstance(o, datetime.datetime):
