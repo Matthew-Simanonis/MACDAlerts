@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd 
 import json, datetime
-import matplotlib.pyplot as plt
 import yfinance as yf
 
 TIMEFRAME = {'max': 0, '1y' : 365, '1mo' : 30, '2y': 830}

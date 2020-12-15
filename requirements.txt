@@ -1,0 +1,6 @@
+npm
+node
+flask
+yfinance
+pandas
+numpy

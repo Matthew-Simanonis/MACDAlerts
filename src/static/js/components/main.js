@@ -9,21 +9,25 @@ import FavoritesList from './favorites';
 function App() {
     // States
     const [input, setInput] = useState('');
+    const [search, setSearch] = useState('ETH-USD');
     const [dataframe, setDataframe] = useState({close: [0]})
-    const [stock, setStock] = useState('ETH-USD')
+    const [stock, setStock] = useState('')
     const [timeframe, setTimeframe] = useState(['1y'])
     const [loading, setLoading] = useState(true)
 
     const fetchGraph = () => {
-        fetch(`/getgraph?stock=${stock}&timeframe=${timeframe}`)
+        fetch(`/getgraph?stock=${search}&timeframe=${timeframe}`)
         .then(response => response.json())
             .then(json => {
                 if (json.status === 200) {
                     setDataframe(json)
+                    setStock(search)
                     setLoading(false)
                 }
                 else{
-                    console.log('Error')
+                    console.log('Error: Stock not found')
+                    setInput('')
+                    setLoading(false)
                 }
         });
         };
@@ -31,7 +35,7 @@ function App() {
     useEffect(() => {
             setLoading(true)
             fetchGraph();
-            }, [timeframe, stock] )
+            }, [timeframe, search] )
 
 
 
@@ -40,15 +44,12 @@ function App() {
             <div className="stock-headings">
                 <div className='stock-info'>
                     <h1>${stock}</h1>
-                    <h1>Current Price: ${dataframe.current}</h1>
-                    <button className='add-favorite'>
-                        <i className='fa fa-plus'></i>
-                    </button>
+                    <h2>Current Price: ${dataframe.current}</h2>
                 </div>
                 <SearchBar
                     input = {input}
                     setInput = {setInput}
-                    setStock = {setStock}
+                    setSearch = {setSearch}
                     setTimeframe = {setTimeframe}
                 />
             </div>

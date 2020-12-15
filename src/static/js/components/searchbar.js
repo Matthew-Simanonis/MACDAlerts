@@ -1,10 +1,10 @@
 import React from "react";
 import Options from "./options"
 
-const SearchBar = ({input, setInput, setStock, setTimeframe}) => {
+const SearchBar = ({input, setInput, setSearch, setTimeframe}) => {
 
   const newStock = () => {
-    setStock(input.toUpperCase())
+    setSearch(input.toUpperCase())
   }
 
     const BarStyling = {width:"20rem",background:"#F2F1F9", border:"none", padding:"0.5rem"};
